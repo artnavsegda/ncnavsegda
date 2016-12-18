@@ -1,0 +1,2 @@
+# ncnavsegda
+Ncurses
