@@ -54,6 +54,7 @@ int main(int argc, char *argv[])
 		mvprintw(10,0,"RX0");
 		mvprintw(11,0,"RX1");
 		mvprintw(12,0,"RX2");
+		mvprintw(13,0,"RX3");
 
 		rx_shift = datamassive[x].rxnum;
 		mvprintw(10+rx_shift,10,"%02X",datamassive[x].recbyte);
@@ -87,6 +88,18 @@ int main(int argc, char *argv[])
 			case KEY_LEFT:
 				if (x>0)
 					x--;
+			break;
+			case '3':
+				while (datamassive[++x].rxnum != 2);
+			break;
+			case '2':
+				while (datamassive[++x].rxnum != 2);
+			break;
+			case '1':
+				while (datamassive[++x].rxnum != 1);
+			break;
+			case '0':
+				while (datamassive[++x].rxnum != 0);
 			break;
 			default:
 				refresh();
