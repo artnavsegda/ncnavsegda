@@ -47,6 +47,8 @@ int main(int argc, char *argv[])
 	{
 		clear();
 		mvprintw(0,0,"%d record read",position);
+		mvprintw(1,0,"position %d",x);
+		mvprintw(2,0,"time %d",datamassive[x].millis);
 
 		/*for (int i=0;i<COLS/2;i++)
 			mvprintw(10,i*2,"%02X",datamassive[x+i].recbyte);*/
