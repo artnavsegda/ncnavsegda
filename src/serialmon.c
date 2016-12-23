@@ -45,7 +45,12 @@ int main(int argc, char *argv[])
 	{
 		clear();
 		mvprintw(0,0,"%d record read",position);
-		mvprintw(10,10,"%x",datamassive[x].recbyte);
+
+		/*for (int i=0;i<COLS/2;i++)
+			mvprintw(10,i*2,"%02X",datamassive[x+i].recbyte);*/
+
+		mvprintw(10,10,"%02X",datamassive[0].recbyte);
+
 		refresh();
 
 		switch(getch())
@@ -55,6 +60,10 @@ int main(int argc, char *argv[])
 			break;
 			case KEY_RIGHT:
 				x++;
+			break;
+			case KEY_LEFT:
+				if (x>0)
+					x--;
 			break;
 			default:
 				refresh();
