@@ -40,6 +40,8 @@ int main(int argc, char *argv[])
 	atexit(endwin);
 
 	int x = 0;
+	int position_shift;
+	int rx_shift;
 
 	while(1)
 	{
@@ -49,7 +51,28 @@ int main(int argc, char *argv[])
 		/*for (int i=0;i<COLS/2;i++)
 			mvprintw(10,i*2,"%02X",datamassive[x+i].recbyte);*/
 
-		mvprintw(10,10,"%02X",datamassive[0].recbyte);
+		mvprintw(10,0,"RX0");
+		mvprintw(11,0,"RX1");
+		mvprintw(12,0,"RX2");
+
+		rx_shift = datamassive[x].rxnum;
+		mvprintw(10+rx_shift,10,"%02X",datamassive[x].recbyte);
+
+		for (int i=1;i<20;i++)
+		{
+			position_shift = datamassive[x+i].millis - datamassive[x].millis;
+			rx_shift = datamassive[x+i].rxnum;
+
+			mvprintw(10+rx_shift,10+(i*2)+position_shift,"%02X",datamassive[x+i].recbyte);
+		}
+
+		/*position_shift = datamassive[x+1].millis - datamassive[x].millis;
+
+		mvprintw(10,12+position_shift,"%02X",datamassive[x+1].recbyte);
+
+		position_shift = datamassive[x+2].millis - datamassive[x].millis;
+
+		mvprintw(10,14+position_shift,"%02X",datamassive[x+2].recbyte);*/
 
 		refresh();
 
