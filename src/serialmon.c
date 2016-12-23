@@ -10,10 +10,23 @@ struct dataunit {
 
 struct dataunit datamassive[10000];
 
-int main(void)
+int main(int argc, char *argv[])
 {
+	if (argc != 2)
+	{
+		printf("enter file name\n");
+		return 1;
+	}
+
+	FILE * datafile = fopen(argv[1],"r");
+	if (datafile == NULL)
+	{
+		perror("open file");
+		return 1;
+	}
+
 	int position = 0;
-	while (scanf("%lu:RX%hhu:%hhX",&datamassive[position].millis,&datamassive[position].rxnum,&datamassive[position].recbyte) != EOF)
+	while (fscanf(datafile,"%lu:RX%hhu:%hhX",&datamassive[position].millis,&datamassive[position].rxnum,&datamassive[position].recbyte) != EOF)
 		position++;
 
 /*	printf("%d record read\n",position);
