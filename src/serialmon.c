@@ -39,17 +39,22 @@ int main(int argc, char *argv[])
 	keypad(stdscr, TRUE);
 	atexit(endwin);
 
+	int x = 0;
+
 	while(1)
 	{
 		clear();
 		mvprintw(0,0,"%d record read",position);
-		mvprintw(10,10,"%x",datamassive[0].recbyte);
+		mvprintw(10,10,"%x",datamassive[x].recbyte);
 		refresh();
 
 		switch(getch())
 		{
 			case 'q':
 				exit(0);
+			break;
+			case KEY_RIGHT:
+				x++;
 			break;
 			default:
 				refresh();
