@@ -1,1 +1,1 @@
-bin_PROGRAMS = hello serialmon
+bin_PROGRAMS = hello serialtrack

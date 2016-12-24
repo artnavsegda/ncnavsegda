@@ -61,7 +61,7 @@ int main(int argc, char *argv[])
 		rx_shift = datamassive[x].rxnum;
 		mvprintw(10+rx_shift,10,"%02X",datamassive[x].recbyte);
 
-		for (int i=1;i<20;i++)
+		for (int i=1;i<100;i++)
 		{
 			position_shift = datamassive[x+i].millis - datamassive[x].millis;
 			rx_shift = datamassive[x+i].rxnum;
