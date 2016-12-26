@@ -42,7 +42,7 @@ struct aeframestruct {
 };
 
 struct a0framestruct {
-	unsigned long int devicenumber;
+	char devicenumber[4];
 };
 
 struct a1framestruct {
@@ -250,7 +250,7 @@ int main(int argc, char *argv[])
 			case 0xA0:
 				if (!readframe(fd,4,&a0frame))
 				{
-					mvprintw(3,0,"%6ld 0xA0 %6lu\n", a0counter++,
+					mvprintw(3,0,"%6ld 0xA0 %s\n", a0counter++,
 							a0frame.devicenumber);
 				}
 			break;
