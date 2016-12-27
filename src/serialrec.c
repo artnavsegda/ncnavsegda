@@ -209,7 +209,7 @@ int main(int argc, char *argv[])
 				{
 					mvprintw(0,0,"%6ld 0xA5 %6d %6d %6d %6d %6d %6d %6d %6d\n", a5counter++,
 						a5frame.currentpmt,
-                                                a5frame.valueamp1,
+            a5frame.valueamp1,
 						a5frame.valueamp2,
 						a5frame.valueamp3,
 						a5frame.battery,
@@ -369,7 +369,7 @@ int main(int argc, char *argv[])
 			break;
 			case 'q':
 				exit(0);
-			break;	
+			break;
 			default:
 				refresh();
 			break;
