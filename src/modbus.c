@@ -9,6 +9,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <arpa/inet.h>
+#include <libkern/OSByteOrder.h>
 #include "modbus.h"
 
 unsigned short CRC16 (const unsigned char *nData, unsigned short wLength);
@@ -90,7 +91,15 @@ int main(int argc, char *argv[])
   	}
   	else
   	{
+                mvprintw(7,7,"recieved CRC 0x%04hX\n",((short *)&askframe.data.reqread.bytes)[1+((numread-6))/2]);
+                mvprintw(8,8,"calculated CRC 0x%04hX\n",CRC16((unsigned char *)&askframe,numread-2));
+
+		((short *)&askframe.data.reqread.bytes)[0] = OSSwapHostToBigInt16(((short *)&askframe.data.reqread.bytes)[0]);
+		((short *)&askframe.data.reqread.bytes)[1] = OSSwapHostToBigInt16(((short *)&askframe.data.reqread.bytes)[1]);
+
 		mvprintw(10,10,"0x%04hX 0x%04hX",((short *)&askframe.data.reqread.bytes)[0], ((short *)&askframe.data.reqread.bytes)[1]);
+		mvprintw(11,11,"0x%08X",((int *)&askframe.data.reqread.bytes)[0]);
+		mvprintw(12,12,"%f",((float *)&askframe.data.reqread.bytes)[0]);
 
   		mvprintw(2,2,"recv %zd bytes\n",numread);
   		mvprintw(3,3,"Unit id: %d\n", askframe.unitid);
@@ -119,8 +128,6 @@ int main(int argc, char *argv[])
                           mvprintw(5,5,"unknown function number\n");
                   break;
                   }
-                  mvprintw(7,7,"recieved CRC 0x%04hX\n",((short *)&askframe.data.reqread.bytes)[1+((numread-6))/2]);
-                  mvprintw(8,8,"calculated CRC 0x%04hX\n",CRC16((unsigned char *)&askframe,numread-2));
   	}
 	refresh();
   	sleep(1);
